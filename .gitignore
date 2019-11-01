@@ -1,0 +1,9 @@
+*/.git/*
+.git
+pom.properties
+target
+.settings
+.project
+.idea
+.iml
+.springBeans

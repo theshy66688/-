@@ -1,0 +1,47 @@
+#端口
+server:
+  port: 10010
+#微服务id
+spring:
+  application:
+    name: gateway-server
+#eureka配置
+eureka:
+  client:
+    #开发阶段的其他配置
+    registry-fetch-interval-seconds: 5  #拉取注册信息
+    instance-info-replication-interval-seconds: 5  #替换信息
+    service-url:
+      defaultZone: http://localhost:10086/eureka/ 
+  instance:
+    prefer-ip-address: true #上报ip地址给注册中心
+    ip-address: 127.0.0.1  #指定当前服务上报的ip地址
+    lease-renewal-interval-in-seconds: 5 #开发阶段改为5秒发一次心跳
+
+#负载均衡配置
+ribbon:
+  ConnectTimeout: 1000 # 连接超时时间(ms)
+  ReadTimeout: 1000 # 通信超时时间(ms)
+  OkToRetryOnAllOperations: false # 是否对所有操作重试
+  MaxAutoRetriesNextServer: 1 # 同一服务不同实例的重试次数
+  MaxAutoRetries: 1 # 同一实例的重试次数
+
+#hystrix
+#熔断器配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMillisecond: 6000 # 熔断超时时长：10000ms
+#zuul
+zuul:
+  prefix: /web
+  ignored-services:
+    - register-center
+  routes:
+    #服务id          映射路径
+    tensquare-base: /base/**
+    
+    
