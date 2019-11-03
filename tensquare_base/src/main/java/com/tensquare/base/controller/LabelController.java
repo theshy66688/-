@@ -1,27 +1,30 @@
 package com.tensquare.base.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.tensquare.base.pojo.Label;
 import com.tensquare.base.service.LableService;
 import com.tensquare.entity.Result;
 import com.tensquare.entity.StatusCode;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/label")
+@CrossOrigin
 public class LabelController {
 
 	@Autowired
 	private LableService lableService;
-	
-	
+
+	/*
+	 * 条件查询
+	 * */
+	@PostMapping("/search")
+	public Result search(@RequestBody Label label) {
+		List<Label> list= lableService.search(label);
+		return new Result(true, StatusCode.OK, "条件查询成功",list);
+	}
 	/*
 	 * 查询所有
 	 * */

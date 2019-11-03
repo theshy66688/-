@@ -11,9 +11,6 @@ public class Label {
 	@Id
    private String id;
    private String labelname;// 标签名称
-
-
-
    private String state;// 状态
    private Integer count;// 数量
    private String recommend;// 是否推荐
@@ -30,11 +27,11 @@ public String getLabelname() {
 public void setLabelname(String labelname) {
 	this.labelname = labelname;
 }
-public String getStatu() {
+public String getState() {
 	return state;
 }
-public void setStatu(String statu) {
-	this.state= statu;
+public void setState(String state) {
+	this.state= state;
 }
 public Integer getCount() {
 	return count;
